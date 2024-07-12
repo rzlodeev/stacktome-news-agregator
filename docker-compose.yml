@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      dockerfile: ./Dockerfile.app
     volumes:
       - ./data:/app/data
     ports:
