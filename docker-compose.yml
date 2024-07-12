@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_DEFAULT_USER: myuser
+      RABBITMQ_DEFAULT_PASS: mypassword
+      RABBITMQ_DEFAULT_VHOST: myvhost
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  celery_worker:
+    build: .
+    command: celery -A src.tasks worker --loglevel=info
+    environment:
+      - PYTHONPATH=/app
+      - CELERY_BROKER_URL=amqp://myuser:mypassword@rabbitmq/myvhost
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "5672:5672"
+
+  celery_beat:
+    build: .
+    command: celery -A src.tasks beat --loglevel=info
+    environment:
+      - PYTHONPATH=/app
+      - CELERY_BROKER_URL=amqp://myuser:mypassword@rabbitmq/myvhost
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "5672:5672"

@@ -1,0 +1,9 @@
+feedparser
+beautifulsoup4
+sqlalchemy
+requests
+python-dotenv
+fastapi
+celery
+uvicorn
+psycopg2-binary
