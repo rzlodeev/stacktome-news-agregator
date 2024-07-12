@@ -85,6 +85,8 @@ Once the containers are up and running, the FastAPI server will be accessible at
 http://127.0.0.1:8000/trending_articles
 ```
 
+You will need to wait for ~1 minute for celery and rabbitmq to set up and celery to recieve task and start updating articles.
+
 ## Project structure:
 
 Here's brief overview of project files:
