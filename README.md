@@ -90,20 +90,37 @@ http://127.0.0.1:8000/trending_articles
 Here's brief overview of project files:
 
 stacktome-news-agregator/
+
 │
+
 ├── app.py                   # FastAPI entry point
+
 │
+
 ├── app/
+
 │   ├── backend.py           # Endpoints definition for FastAPI
+
 │   ├── celery_config.py     # Celery worker definition
+
 │   ├── tasks.py             # Celery tasks for fetching and filtering RSS feeds
+
 │   ├── database.py          # SQLAlchemy definition of database
+
 │   ├── models.py            # Database model for resulting news
+
 │   ├── news_feed.py         # Module for fetching news articles from RSS
+
 │   ├── openai_client.py     # OpenAI client for calculating sentiment score
+
 │   └── trends_analytics.py  # Module for fetching keywords of trending news from Google Trends
+
 │
+
 ├── docker-compose.yml       # Docker Compose file for defining services
+
 ├── Dockerfile               # Dockerfile for building the FastAPI application image
+
 ├── requirements.txt         # Python dependencies
+
 └── README.md                # This file
